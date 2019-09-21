@@ -10,13 +10,11 @@ namespace Telegram.Bot.Args
     /// <seealso cref="EventArgs" />
     public class MessageEventArgs : EventArgs
     {
-        /// <summary>
-        /// Gets the message.
-        /// </summary>
+
         /// <value>
         /// The message.
         /// </value>
-        public Message Message { get; private set; }
+        public Message  Message    { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MessageEventArgs"/> class.
@@ -24,7 +22,11 @@ namespace Telegram.Bot.Args
         /// <param name="update">The update.</param>
         internal MessageEventArgs(Update update)
         {
-            Message = (update.Type == UpdateType.EditedMessage) ? update.EditedMessage : update.Message;
+
+            Message = update.Type == UpdateType.EditedMessage
+                          ? update.EditedMessage
+                          : update.Message;
+
         }
 
         /// <summary>
@@ -43,6 +45,9 @@ namespace Telegram.Bot.Args
         /// <returns>
         /// The result of the conversion.
         /// </returns>
-        public static implicit operator MessageEventArgs(UpdateEventArgs e) => new MessageEventArgs(e.Update);
+        public static implicit operator MessageEventArgs(UpdateEventArgs e)
+            => new MessageEventArgs(e.Update);
+
     }
+
 }

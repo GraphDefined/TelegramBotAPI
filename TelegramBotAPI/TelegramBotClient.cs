@@ -21,27 +21,32 @@ using File = Telegram.Bot.Types.File;
 
 namespace Telegram.Bot
 {
+
     /// <summary>
     /// A client to use the Telegram Bot API
     /// </summary>
-    public class TelegramBotClient : ITelegramBotClient
+    public class TelegramBotClient: ITelegramBotClient
     {
-        /// <inheritdoc/>
-        public int BotId { get; }
 
-        private static readonly Update[] EmptyUpdates = { };
+        #region Data
 
-        private const string BaseUrl = "https://api.telegram.org/bot";
+        private static readonly  Update[]    EmptyUpdates  = { };
 
-        private const string BaseFileUrl = "https://api.telegram.org/file/bot";
+        private const            String      BaseUrl       = "https://api.telegram.org/bot";
 
-        private readonly string _baseRequestUrl;
+        private const            String      BaseFileUrl   = "https://api.telegram.org/file/bot";
 
-        private readonly string _token;
+        private readonly         String      _baseRequestUrl;
 
-        private readonly HttpClient _httpClient;
+        private readonly         String      _token;
 
-        #region Config Properties
+        private readonly         HttpClient  _httpClient;
+
+        #endregion
+
+        #region Properties
+
+        public Int32 BotId { get; }
 
         /// <summary>
         /// Timeout for requests
@@ -64,7 +69,7 @@ namespace Telegram.Bot
         /// </summary>
         public int MessageOffset { get; set; }
 
-        #endregion Config Properties
+        #endregion
 
         #region Events
 
@@ -84,10 +89,12 @@ namespace Telegram.Bot
         /// <param name="e">The <see cref="UpdateEventArgs"/> instance containing the event data.</param>
         protected virtual void OnUpdateReceived(UpdateEventArgs e)
         {
+
             OnUpdate?.Invoke(this, e);
 
             switch (e.Update.Type)
             {
+
                 case UpdateType.Message:
                     OnMessage?.Invoke(this, e);
                     break;
@@ -107,7 +114,9 @@ namespace Telegram.Bot
                 case UpdateType.EditedMessage:
                     OnMessageEdited?.Invoke(this, e);
                     break;
+
             }
+
         }
 
         /// <summary>
@@ -152,17 +161,20 @@ namespace Telegram.Bot
 
         #endregion
 
+        #region Constructor(s)
+
         /// <summary>
         /// Create a new <see cref="TelegramBotClient"/> instance.
         /// </summary>
-        /// <param name="token">API token</param>
+        /// <param name="Token">API token</param>
         /// <param name="httpClient">A custom <see cref="HttpClient"/></param>
-        /// <exception cref="ArgumentException">Thrown if <paramref name="token"/> format is invalid</exception>
-        public TelegramBotClient(string token, HttpClient httpClient = null)
+        /// <exception cref="ArgumentException">Thrown if <paramref name="Token"/> format is invalid</exception>
+        public TelegramBotClient(String Token, HttpClient httpClient = null)
         {
-            _token = token ?? throw new ArgumentNullException(nameof(token));
-            string[] parts = _token.Split(':');
-            if (parts.Length > 1 && int.TryParse(parts[0], out int id))
+
+            _token = Token ?? throw new ArgumentNullException(nameof(Token));
+            var parts = _token.Split(':');
+            if (parts.Length > 1 && Int32.TryParse(parts[0], out Int32 id))
             {
                 BotId = id;
             }
@@ -170,24 +182,26 @@ namespace Telegram.Bot
             {
                 throw new ArgumentException(
                     "Invalid format. A valid token looks like \"1234567:4TT8bAc8GHUspu3ERYn-KGcvsvGB9u_n4ddy\".",
-                    nameof(token)
+                    nameof(Token)
                 );
             }
 
-            _baseRequestUrl = $"{BaseUrl}{_token}/";
-            _httpClient = httpClient ?? new HttpClient();
+            _baseRequestUrl  = $"{BaseUrl}{_token}/";
+            _httpClient      = httpClient ?? new HttpClient();
+
         }
 
         /// <summary>
         /// Create a new <see cref="TelegramBotClient"/> instance behind a proxy.
         /// </summary>
-        /// <param name="token">API token</param>
+        /// <param name="Token">API token</param>
         /// <param name="webProxy">Use this <see cref="IWebProxy"/> to connect to the API</param>
-        /// <exception cref="ArgumentException">Thrown if <paramref name="token"/> format is invalid</exception>
-        public TelegramBotClient(string token, IWebProxy webProxy)
+        /// <exception cref="ArgumentException">Thrown if <paramref name="Token"/> format is invalid</exception>
+        public TelegramBotClient(String Token, IWebProxy webProxy)
         {
-            _token = token ?? throw new ArgumentNullException(nameof(token));
-            string[] parts = _token.Split(':');
+
+            _token = Token ?? throw new ArgumentNullException(nameof(Token));
+            var parts = _token.Split(':');
             if (int.TryParse(parts[0], out int id))
             {
                 BotId = id;
@@ -196,18 +210,23 @@ namespace Telegram.Bot
             {
                 throw new ArgumentException(
                     "Invalid format. A valid token looks like \"1234567:4TT8bAc8GHUspu3ERYn-KGcvsvGB9u_n4ddy\".",
-                    nameof(token)
+                    nameof(Token)
                 );
             }
 
-            _baseRequestUrl = $"{BaseUrl}{_token}/";
-            var httpClientHander = new HttpClientHandler
-            {
-                Proxy = webProxy,
-                UseProxy = true
-            };
-            _httpClient = new HttpClient(httpClientHander);
+            _baseRequestUrl       = $"{BaseUrl}{_token}/";
+
+            var httpClientHander  = new HttpClientHandler {
+                                            Proxy    = webProxy,
+                                            UseProxy = true
+                                        };
+
+            _httpClient           = new HttpClient(httpClientHander);
+
         }
+
+        #endregion
+
 
         #region Helpers
 

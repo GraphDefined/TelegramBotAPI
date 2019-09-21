@@ -11,17 +11,19 @@ using Telegram.Bot.Types.ReplyMarkups;
 
 namespace Telegram.Bot.Types
 {
+
     /// <summary>
     /// This object represents a message.
     /// </summary>
     [JsonObject(MemberSerialization.OptIn, NamingStrategyType = typeof(SnakeCaseNamingStrategy))]
     public class Message
     {
+
         /// <summary>
         /// Unique message identifier
         /// </summary>
         [JsonProperty(Required = Required.Always)]
-        public int MessageId { get; set; }
+        public Int32 MessageId { get; set; }
 
         /// <summary>
         /// Sender
@@ -46,7 +48,8 @@ namespace Telegram.Bot.Types
         /// Indicates whether this message is a forwarded message
         /// </summary>
         [Obsolete("Check ForwardFrom and ForwardFromChat properties instead")]
-        public bool IsForwarded => ForwardFrom != null;
+        public Boolean IsForwarded
+            => ForwardFrom != null;
 
         /// <summary>
         /// Optional. For forwarded messages, sender of the original message
@@ -64,19 +67,19 @@ namespace Telegram.Bot.Types
         /// Optional. For forwarded channel posts, identifier of the original message in the channel
         /// </summary>
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public int ForwardFromMessageId { get; set; }
+        public Int32 ForwardFromMessageId { get; set; }
 
         /// <summary>
         /// Optional. For messages forwarded from channels, signature of the post author if present
         /// </summary>
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public string ForwardSignature { get; set; }
+        public String ForwardSignature { get; set; }
 
         /// <summary>
         /// Optional. Sender's name for messages forwarded from users who disallow adding a link to their account in forwarded messages
         /// </summary>
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public string ForwardSenderName { get; set; }
+        public String ForwardSenderName { get; set; }
 
         /// <summary>
         /// Optional. For forwarded messages, date the original message was sent in Unix time
@@ -102,19 +105,19 @@ namespace Telegram.Bot.Types
         /// Optional. The unique identifier of a media message group this message belongs to
         /// </summary>
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public string MediaGroupId { get; set; }
+        public String MediaGroupId { get; set; }
 
         /// <summary>
         /// Optional. Signature of the post author for messages in channels
         /// </summary>
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public string AuthorSignature { get; set; }
+        public String AuthorSignature { get; set; }
 
         /// <summary>
         /// Optional. For text messages, the actual UTF-8 text of the message
         /// </summary>
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public string Text { get; set; }
+        public String Text { get; set; }
 
         /// <summary>
         /// Optional. For text messages, special entities like usernames, URLs, bot commands, etc. that appear in the text
@@ -205,7 +208,7 @@ namespace Telegram.Bot.Types
         /// Caption for the photo or video
         /// </summary>
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public string Caption { get; set; }
+        public String Caption { get; set; }
 
         /// <summary>
         /// Optional. Description is a shared contact, information about the contact
@@ -247,7 +250,7 @@ namespace Telegram.Bot.Types
         /// Optional. A group title was changed to this value
         /// </summary>
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public string NewChatTitle { get; set; }
+        public String NewChatTitle { get; set; }
 
         /// <summary>
         /// Optional. A group photo was change to this value
@@ -259,37 +262,37 @@ namespace Telegram.Bot.Types
         /// Optional. Informs that the group photo was deleted
         /// </summary>
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public bool DeleteChatPhoto { get; set; }
+        public Boolean DeleteChatPhoto { get; set; }
 
         /// <summary>
         /// Optional. Informs that the group has been created
         /// </summary>
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public bool GroupChatCreated { get; set; }
+        public Boolean GroupChatCreated { get; set; }
 
         /// <summary>
         /// Optional. Service message: the supergroup has been created
         /// </summary>
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public bool SupergroupChatCreated { get; set; }
+        public Boolean SupergroupChatCreated { get; set; }
 
         /// <summary>
         /// Optional. Service message: the channel has been created
         /// </summary>
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public bool ChannelChatCreated { get; set; }
+        public Boolean ChannelChatCreated { get; set; }
 
         /// <summary>
         /// Optional. The group has been migrated to a supergroup with the specified identifier
         /// </summary>
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public long MigrateToChatId { get; set; }
+        public Int64 MigrateToChatId { get; set; }
 
         /// <summary>
         /// Optional. The supergroup has been migrated from a group with the specified identifier
         /// </summary>
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public long MigrateFromChatId { get; set; }
+        public Int64 MigrateFromChatId { get; set; }
 
         /// <summary>
         /// Optional. Specified message was pinned. Note that the Description object in this field will not contain further reply_to_message fields even if it is itself a reply
@@ -313,7 +316,7 @@ namespace Telegram.Bot.Types
         /// Optional. The domain name of the website on which the user has logged in
         /// </summary>
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public string ConnectedWebsite { get; set; }
+        public String ConnectedWebsite { get; set; }
 
         /// <summary>
         /// Optional. Telegram Passport data
@@ -337,6 +340,7 @@ namespace Telegram.Bot.Types
         {
             get
             {
+
                 if (Audio != null)
                     return MessageType.Audio;
 
@@ -419,6 +423,7 @@ namespace Telegram.Bot.Types
                     return MessageType.Poll;
 
                 return MessageType.Unknown;
+
             }
         }
     }
