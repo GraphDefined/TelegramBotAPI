@@ -1,0 +1,8 @@
+*.exe
+*.dll
+*.suo
+*/bin
+*/obj
+*.csproj.user
+!.gitkeep
+/smsapiTests/App.Config

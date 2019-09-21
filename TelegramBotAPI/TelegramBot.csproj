@@ -1,0 +1,292 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2FEE90E4-7E55-49A6-8BE9-5A434FFA5A00}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Telegram.Bot</RootNamespace>
+    <AssemblyName>Telegram.Bot</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Styx\libs\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Args\ApiRequestEventArgs.cs" />
+    <Compile Include="Args\ApiResponseEventArgs.cs" />
+    <Compile Include="Args\CallbackQueryEventArgs.cs" />
+    <Compile Include="Args\ChosenInlineResultEventArgs.cs" />
+    <Compile Include="Args\InlineQueryEventArgs.cs" />
+    <Compile Include="Args\MessageEventArgs.cs" />
+    <Compile Include="Args\ReceiveErrorEventArgs.cs" />
+    <Compile Include="Args\ReceiveGeneralErrorEventArgs.cs" />
+    <Compile Include="Args\UpdateEventArgs.cs" />
+    <Compile Include="Converters\ChatIdConverter.cs" />
+    <Compile Include="Converters\InputFileConverter.cs" />
+    <Compile Include="Converters\InputMediaConverter.cs" />
+    <Compile Include="Converters\MessageEntityTypeConverter.cs" />
+    <Compile Include="Enums\Enums.cs" />
+    <Compile Include="Exceptions\ApiException.cs" />
+    <Compile Include="Exceptions\ApiExceptionInfo.cs" />
+    <Compile Include="Exceptions\ApiExceptionParser.cs" />
+    <Compile Include="Exceptions\BadRequestException.cs" />
+    <Compile Include="Exceptions\BadRequestExceptions\ChatNotFoundException.cs" />
+    <Compile Include="Exceptions\BadRequestExceptions\ContactRequestException.cs" />
+    <Compile Include="Exceptions\BadRequestExceptions\Invalid Parameter\InvalidGameShortNameException.cs" />
+    <Compile Include="Exceptions\BadRequestExceptions\Invalid Parameter\InvalidParameterException.cs" />
+    <Compile Include="Exceptions\BadRequestExceptions\Invalid Parameter\InvalidQueryIdException.cs" />
+    <Compile Include="Exceptions\BadRequestExceptions\Invalid Parameter\InvalidStickerDimensionsException.cs" />
+    <Compile Include="Exceptions\BadRequestExceptions\Invalid Parameter\InvalidStickerEmojisException.cs" />
+    <Compile Include="Exceptions\BadRequestExceptions\Invalid Parameter\InvalidStickerSetNameException.cs" />
+    <Compile Include="Exceptions\BadRequestExceptions\Invalid Parameter\InvalidUserIdException.cs" />
+    <Compile Include="Exceptions\BadRequestExceptions\MessageIsNotModifiedException.cs" />
+    <Compile Include="Exceptions\BadRequestExceptions\StickerSetNameExistsException.cs" />
+    <Compile Include="Exceptions\BadRequestExceptions\StickerSetNotModifiedException.cs" />
+    <Compile Include="Exceptions\BadRequestExceptions\UserNotFoundException.cs" />
+    <Compile Include="Exceptions\BotBlockedException.cs" />
+    <Compile Include="Exceptions\BotRestrictedException.cs" />
+    <Compile Include="Exceptions\ForbiddenException.cs" />
+    <Compile Include="Exceptions\ForbiddenExceptions\ChatNotInitiatedException.cs" />
+    <Compile Include="Exceptions\MissingParameterException.cs" />
+    <Compile Include="Exceptions\NotEnoughRightsException.cs" />
+    <Compile Include="Exceptions\WrongChatTypeException.cs" />
+    <Compile Include="Helpers\Extensions.cs" />
+    <Compile Include="ITelegramBotClient.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Requests\Abstractions\IChatMessage.cs" />
+    <Compile Include="Requests\Abstractions\IFormattableMessage.cs" />
+    <Compile Include="Requests\Abstractions\IInlineMessage.cs" />
+    <Compile Include="Requests\Abstractions\IInlineReplyMarkupMessage.cs" />
+    <Compile Include="Requests\Abstractions\INotifiableMessage.cs" />
+    <Compile Include="Requests\Abstractions\IReplyMarkupMessage.cs" />
+    <Compile Include="Requests\Abstractions\IReplyMessage.cs" />
+    <Compile Include="Requests\Abstractions\IRequest.cs" />
+    <Compile Include="Requests\Abstractions\IThumbMediaMessage.cs" />
+    <Compile Include="Requests\Available Methods\Admin Bot\DeleteChatPhotoRequest.cs" />
+    <Compile Include="Requests\Available Methods\Admin Bot\DeleteChatStickerSetRequest.cs" />
+    <Compile Include="Requests\Available Methods\Admin Bot\ExportChatInviteLinkRequest.cs" />
+    <Compile Include="Requests\Available Methods\Admin Bot\KickChatMemberRequest.cs" />
+    <Compile Include="Requests\Available Methods\Admin Bot\PinChatMessageRequest.cs" />
+    <Compile Include="Requests\Available Methods\Admin Bot\PromoteChatMemberRequest.cs" />
+    <Compile Include="Requests\Available Methods\Admin Bot\RestrictChatMemberRequest.cs" />
+    <Compile Include="Requests\Available Methods\Admin Bot\SetChatDescriptionRequest.cs" />
+    <Compile Include="Requests\Available Methods\Admin Bot\SetChatPermissionsRequest.cs" />
+    <Compile Include="Requests\Available Methods\Admin Bot\SetChatPhotoRequest.cs" />
+    <Compile Include="Requests\Available Methods\Admin Bot\SetChatStickerSetRequest.cs" />
+    <Compile Include="Requests\Available Methods\Admin Bot\SetChatTitleRequest.cs" />
+    <Compile Include="Requests\Available Methods\Admin Bot\UnbanChatMemberRequest.cs" />
+    <Compile Include="Requests\Available Methods\Admin Bot\UnpinChatMessageRequest.cs" />
+    <Compile Include="Requests\Available Methods\AnswerCallbackQueryRequest.cs" />
+    <Compile Include="Requests\Available Methods\ForwardMessageRequest.cs" />
+    <Compile Include="Requests\Available Methods\GetChatAdministratorsRequest.cs" />
+    <Compile Include="Requests\Available Methods\GetChatMemberRequest.cs" />
+    <Compile Include="Requests\Available Methods\GetChatMembersCountRequest.cs" />
+    <Compile Include="Requests\Available Methods\GetChatRequest.cs" />
+    <Compile Include="Requests\Available Methods\GetFileRequest.cs" />
+    <Compile Include="Requests\Available Methods\GetMeRequest.cs" />
+    <Compile Include="Requests\Available Methods\GetUserProfilePhotosRequest.cs" />
+    <Compile Include="Requests\Available Methods\LeaveChatRequest.cs" />
+    <Compile Include="Requests\Available Methods\Location\EditInlineMessageLiveLocationRequest.cs" />
+    <Compile Include="Requests\Available Methods\Location\EditMessageLiveLocationRequest.cs" />
+    <Compile Include="Requests\Available Methods\Location\SendLocationRequest.cs" />
+    <Compile Include="Requests\Available Methods\Location\StopInlineMessageLiveLocationRequest.cs" />
+    <Compile Include="Requests\Available Methods\Location\StopMessageLiveLocationRequest.cs" />
+    <Compile Include="Requests\Available Methods\SendChatActionRequest.cs" />
+    <Compile Include="Requests\Available Methods\Sending Messages\SendAnimationRequest.cs" />
+    <Compile Include="Requests\Available Methods\Sending Messages\SendAudioRequest.cs" />
+    <Compile Include="Requests\Available Methods\Sending Messages\SendContactRequest.cs" />
+    <Compile Include="Requests\Available Methods\Sending Messages\SendDocumentRequest.cs" />
+    <Compile Include="Requests\Available Methods\Sending Messages\SendMediaGroupRequest.cs" />
+    <Compile Include="Requests\Available Methods\Sending Messages\SendMessageRequest.cs" />
+    <Compile Include="Requests\Available Methods\Sending Messages\SendPhotoRequest.cs" />
+    <Compile Include="Requests\Available Methods\Sending Messages\SendPollRequest.cs" />
+    <Compile Include="Requests\Available Methods\Sending Messages\SendVenueRequest.cs" />
+    <Compile Include="Requests\Available Methods\Sending Messages\SendVideoNoteRequest.cs" />
+    <Compile Include="Requests\Available Methods\Sending Messages\SendVideoRequest.cs" />
+    <Compile Include="Requests\Available Methods\Sending Messages\SendVoiceRequest.cs" />
+    <Compile Include="Requests\FileRequestBase.cs" />
+    <Compile Include="Requests\Games\GetGameHighScoresRequest.cs" />
+    <Compile Include="Requests\Games\GetInlineGameHighScoresRequest.cs" />
+    <Compile Include="Requests\Games\SendGameRequest.cs" />
+    <Compile Include="Requests\Games\SetGameScoreRequest.cs" />
+    <Compile Include="Requests\Games\SetInlineGameScoreRequest.cs" />
+    <Compile Include="Requests\Getting Updates\DeleteWebhookRequest.cs" />
+    <Compile Include="Requests\Getting Updates\GetUpdatesRequest.cs" />
+    <Compile Include="Requests\Getting Updates\GetWebhookInfoRequest.cs" />
+    <Compile Include="Requests\Getting Updates\SetWebhookRequest.cs" />
+    <Compile Include="Requests\Inline Mode\AnswerInlineQueryRequest.cs" />
+    <Compile Include="Requests\ParameterlessRequest.cs" />
+    <Compile Include="Requests\Payments\AnswerPreCheckoutQueryRequest.cs" />
+    <Compile Include="Requests\Payments\AnswerShippingQueryRequest.cs" />
+    <Compile Include="Requests\Payments\SendInvoiceRequest.cs" />
+    <Compile Include="Requests\RequestBase.cs" />
+    <Compile Include="Requests\Stickers\AddStickerToSetRequest.cs" />
+    <Compile Include="Requests\Stickers\CreateNewStickerSetRequest.cs" />
+    <Compile Include="Requests\Stickers\DeleteStickerFromSetRequest.cs" />
+    <Compile Include="Requests\Stickers\GetStickerSetRequest.cs" />
+    <Compile Include="Requests\Stickers\SendStickerRequest.cs" />
+    <Compile Include="Requests\Stickers\SetStickerPositionInSetRequest.cs" />
+    <Compile Include="Requests\Stickers\UploadStickerFileRequest.cs" />
+    <Compile Include="Requests\Update Messages\DeleteMessageRequest.cs" />
+    <Compile Include="Requests\Update Messages\EditInlineMessageCaptionRequest.cs" />
+    <Compile Include="Requests\Update Messages\EditInlineMessageMediaRequest.cs" />
+    <Compile Include="Requests\Update Messages\EditInlineMessageReplyMarkupRequest.cs" />
+    <Compile Include="Requests\Update Messages\EditInlineMessageTextRequest.cs" />
+    <Compile Include="Requests\Update Messages\EditMessageCaptionRequest.cs" />
+    <Compile Include="Requests\Update Messages\EditMessageMediaRequest.cs" />
+    <Compile Include="Requests\Update Messages\EditMessageReplyMarkupRequest.cs" />
+    <Compile Include="Requests\Update Messages\EditMessageTextRequest.cs" />
+    <Compile Include="Requests\Update Messages\StopPollRequest.cs" />
+    <Compile Include="TelegramBotClient.cs" />
+    <Compile Include="Types\Animation.cs" />
+    <Compile Include="Types\ApiResponse.cs" />
+    <Compile Include="Types\Audio.cs" />
+    <Compile Include="Types\CallbackGame.cs" />
+    <Compile Include="Types\CallbackQuery.cs" />
+    <Compile Include="Types\Chat.cs" />
+    <Compile Include="Types\ChatId.cs" />
+    <Compile Include="Types\ChatMember.cs" />
+    <Compile Include="Types\ChatPermissions.cs" />
+    <Compile Include="Types\ChatPhoto.cs" />
+    <Compile Include="Types\ChosenInlineResult.cs" />
+    <Compile Include="Types\Contact.cs" />
+    <Compile Include="Types\Document.cs" />
+    <Compile Include="Types\Enums\ChatAction.cs" />
+    <Compile Include="Types\Enums\ChatMemberStatus.cs" />
+    <Compile Include="Types\Enums\ChatType.cs" />
+    <Compile Include="Types\Enums\FileType.cs" />
+    <Compile Include="Types\Enums\MaskPositionPoint.cs" />
+    <Compile Include="Types\Enums\MessageEntityType.cs" />
+    <Compile Include="Types\Enums\MessageType.cs" />
+    <Compile Include="Types\Enums\ParseMode.cs" />
+    <Compile Include="Types\Enums\UpdateType.cs" />
+    <Compile Include="Types\File.cs" />
+    <Compile Include="Types\FileBase.cs" />
+    <Compile Include="Types\Game.cs" />
+    <Compile Include="Types\GameHighScore.cs" />
+    <Compile Include="Types\InlineQuery.cs" />
+    <Compile Include="Types\InlineQueryResults\Abstractions\ICaptionInlineQueryResult.cs" />
+    <Compile Include="Types\InlineQueryResults\Abstractions\IInputMessageContentResult.cs" />
+    <Compile Include="Types\InlineQueryResults\Abstractions\ILocationInlineQueryResult.cs" />
+    <Compile Include="Types\InlineQueryResults\Abstractions\IThumbnailInlineQueryResult.cs" />
+    <Compile Include="Types\InlineQueryResults\Abstractions\IThumbnailUrlInlineQueryResult.cs" />
+    <Compile Include="Types\InlineQueryResults\Abstractions\ITitleInlineQueryResult.cs" />
+    <Compile Include="Types\InlineQueryResults\InlineQueryResultArticle.cs" />
+    <Compile Include="Types\InlineQueryResults\InlineQueryResultAudio.cs" />
+    <Compile Include="Types\InlineQueryResults\InlineQueryResultBase.cs" />
+    <Compile Include="Types\InlineQueryResults\InlineQueryResultCachedAudio.cs" />
+    <Compile Include="Types\InlineQueryResults\InlineQueryResultCachedDocument.cs" />
+    <Compile Include="Types\InlineQueryResults\InlineQueryResultCachedGif.cs" />
+    <Compile Include="Types\InlineQueryResults\InlineQueryResultCachedMpeg4Gif.cs" />
+    <Compile Include="Types\InlineQueryResults\InlineQueryResultCachedPhoto.cs" />
+    <Compile Include="Types\InlineQueryResults\InlineQueryResultCachedSticker.cs" />
+    <Compile Include="Types\InlineQueryResults\InlineQueryResultCachedVideo.cs" />
+    <Compile Include="Types\InlineQueryResults\InlineQueryResultCachedVoice.cs" />
+    <Compile Include="Types\InlineQueryResults\InlineQueryResultContact.cs" />
+    <Compile Include="Types\InlineQueryResults\InlineQueryResultDocument.cs" />
+    <Compile Include="Types\InlineQueryResults\InlineQueryResultGame.cs" />
+    <Compile Include="Types\InlineQueryResults\InlineQueryResultGif.cs" />
+    <Compile Include="Types\InlineQueryResults\InlineQueryResultLocation.cs" />
+    <Compile Include="Types\InlineQueryResults\InlineQueryResultMpeg4Gif.cs" />
+    <Compile Include="Types\InlineQueryResults\InlineQueryResultPhoto.cs" />
+    <Compile Include="Types\InlineQueryResults\InlineQueryResultType.cs" />
+    <Compile Include="Types\InlineQueryResults\InlineQueryResultVenue.cs" />
+    <Compile Include="Types\InlineQueryResults\InlineQueryResultVideo.cs" />
+    <Compile Include="Types\InlineQueryResults\InlineQueryResultVoice.cs" />
+    <Compile Include="Types\InlineQueryResults\InputContactMessageContent.cs" />
+    <Compile Include="Types\InlineQueryResults\InputLocationMessageContent.cs" />
+    <Compile Include="Types\InlineQueryResults\InputMessageContentBase.cs" />
+    <Compile Include="Types\InlineQueryResults\InputTextMessageContent.cs" />
+    <Compile Include="Types\InlineQueryResults\InputVenueMessageContent.cs" />
+    <Compile Include="Types\InputFiles\IAlbumInputMedia.cs" />
+    <Compile Include="Types\InputFiles\IInputFile.cs" />
+    <Compile Include="Types\InputFiles\IInputMedia.cs" />
+    <Compile Include="Types\InputFiles\IInputMediaThumb.cs" />
+    <Compile Include="Types\InputFiles\InputFileStream.cs" />
+    <Compile Include="Types\InputFiles\InputMedia.cs" />
+    <Compile Include="Types\InputFiles\InputMediaAnimation.cs" />
+    <Compile Include="Types\InputFiles\InputMediaAudio.cs" />
+    <Compile Include="Types\InputFiles\InputMediaBase.cs" />
+    <Compile Include="Types\InputFiles\InputMediaDocument.cs" />
+    <Compile Include="Types\InputFiles\InputMediaPhoto.cs" />
+    <Compile Include="Types\InputFiles\InputMediaVideo.cs" />
+    <Compile Include="Types\InputFiles\InputOnlineFile.cs" />
+    <Compile Include="Types\InputFiles\InputTelegramFile.cs" />
+    <Compile Include="Types\Location.cs" />
+    <Compile Include="Types\LoginUrl.cs" />
+    <Compile Include="Types\MaskPosition.cs" />
+    <Compile Include="Types\Message.cs" />
+    <Compile Include="Types\MessageEntity.cs" />
+    <Compile Include="Types\Passport\EncryptedCredentials.cs" />
+    <Compile Include="Types\Passport\EncryptedPassportElement.cs" />
+    <Compile Include="Types\Passport\PassportData.cs" />
+    <Compile Include="Types\Passport\PassportFile.cs" />
+    <Compile Include="Types\Payments\Invoice.cs" />
+    <Compile Include="Types\Payments\LabeledPrice.cs" />
+    <Compile Include="Types\Payments\OrderInfo.cs" />
+    <Compile Include="Types\Payments\PreCheckoutQuery.cs" />
+    <Compile Include="Types\Payments\ShippingAddress.cs" />
+    <Compile Include="Types\Payments\ShippingOption.cs" />
+    <Compile Include="Types\Payments\ShippingQuery.cs" />
+    <Compile Include="Types\Payments\SuccessfulPayment.cs" />
+    <Compile Include="Types\PhotoSize.cs" />
+    <Compile Include="Types\Poll.cs" />
+    <Compile Include="Types\PollOption.cs" />
+    <Compile Include="Types\ReplyMarkups\ForceReplyMarkup.cs" />
+    <Compile Include="Types\ReplyMarkups\IKeyboardButton.cs" />
+    <Compile Include="Types\ReplyMarkups\InlineKeyboardButton.cs" />
+    <Compile Include="Types\ReplyMarkups\InlineKeyboardMarkup.cs" />
+    <Compile Include="Types\ReplyMarkups\IReplyMarkup.cs" />
+    <Compile Include="Types\ReplyMarkups\KeyboardButton.cs" />
+    <Compile Include="Types\ReplyMarkups\ReplyKeyboardMarkup.cs" />
+    <Compile Include="Types\ReplyMarkups\ReplyKeyboardRemove.cs" />
+    <Compile Include="Types\ReplyMarkups\ReplyMarkupBase.cs" />
+    <Compile Include="Types\ResponseParameters.cs" />
+    <Compile Include="Types\Sticker.cs" />
+    <Compile Include="Types\StickerSet.cs" />
+    <Compile Include="Types\Update.cs" />
+    <Compile Include="Types\User.cs" />
+    <Compile Include="Types\UserProfilePhotos.cs" />
+    <Compile Include="Types\Venue.cs" />
+    <Compile Include="Types\Video.cs" />
+    <Compile Include="Types\VideoNote.cs" />
+    <Compile Include="Types\Voice.cs" />
+    <Compile Include="Types\WebhookInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
