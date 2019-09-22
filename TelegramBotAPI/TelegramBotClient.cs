@@ -6,7 +6,9 @@ using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Newtonsoft.Json;
+
 using Telegram.Bot.Args;
 using Telegram.Bot.Exceptions;
 using Telegram.Bot.Requests;
@@ -76,12 +78,12 @@ namespace Telegram.Bot
         /// <summary>
         /// Occurs before sending a request to API
         /// </summary>
-        public event EventHandler<ApiRequestEventArgs> MakingApiRequest;
+        public event EventHandler<ApiRequestEventArgs>   MakingApiRequest;
 
         /// <summary>
         /// Occurs after receiving the response to an API request
         /// </summary>
-        public event EventHandler<ApiResponseEventArgs> ApiResponseReceived;
+        public event EventHandler<ApiResponseEventArgs>  ApiResponseReceived;
 
         /// <summary>
         /// Raises the <see cref="OnUpdate" />, <see cref="OnMessage"/>, <see cref="OnInlineQuery"/>, <see cref="OnInlineResultChosen"/> and <see cref="OnCallbackQuery"/> events.
@@ -231,76 +233,80 @@ namespace Telegram.Bot
         #region Helpers
 
         /// <inheritdoc />
-        public async Task<TResponse> MakeRequestAsync<TResponse>(
-            IRequest<TResponse> request,
-            CancellationToken cancellationToken = default)
+        public async Task<TResponse> MakeRequestAsync<TResponse>(IRequest<TResponse>  request,
+                                                                 CancellationToken    cancellationToken = default)
         {
-            string url = _baseRequestUrl + request.MethodName;
 
-            var httpRequest = new HttpRequestMessage(request.Method, url)
-            {
-                Content = request.ToHttpContent()
-            };
+            var url = _baseRequestUrl + request.MethodName;
 
-            var reqDataArgs = new ApiRequestEventArgs
-            {
-                MethodName = request.MethodName,
+            var httpRequest = new HttpRequestMessage(request.Method, url) {
+                                      Content = request.ToHttpContent()
+                                  };
+
+            var reqDataArgs = new ApiRequestEventArgs {
+                MethodName  = request.MethodName,
                 HttpContent = httpRequest.Content,
             };
+
             MakingApiRequest?.Invoke(this, reqDataArgs);
 
             HttpResponseMessage httpResponse;
             try
             {
-                httpResponse = await _httpClient.SendAsync(httpRequest, cancellationToken)
-                    .ConfigureAwait(false);
+                httpResponse = await _httpClient.SendAsync(httpRequest, cancellationToken).
+                                                 ConfigureAwait(false);
             }
             catch (TaskCanceledException e)
             {
+
                 if (cancellationToken.IsCancellationRequested)
                     throw;
 
                 throw new ApiRequestException("Request timed out", 408, e);
+
             }
 
             // required since user might be able to set new status code using following event arg
-            var actualResponseStatusCode = httpResponse.StatusCode;
-            string responseJson = await httpResponse.Content.ReadAsStringAsync()
-                .ConfigureAwait(false);
+            var actualResponseStatusCode  = httpResponse.StatusCode;
+            var responseJson              = await httpResponse.Content.ReadAsStringAsync().
+                                                                       ConfigureAwait(false);
 
-            ApiResponseReceived?.Invoke(this, new ApiResponseEventArgs
-            {
-                ResponseMessage = httpResponse,
-                ApiRequestEventArgs = reqDataArgs
-            });
+            ApiResponseReceived?.Invoke(this,
+                                        new ApiResponseEventArgs {
+                                                ResponseMessage     = httpResponse,
+                                                ApiRequestEventArgs = reqDataArgs
+                                            });
 
             switch (actualResponseStatusCode)
             {
+
                 case HttpStatusCode.OK:
                     break;
+
                 case HttpStatusCode.Unauthorized:
                 case HttpStatusCode.BadRequest when !string.IsNullOrWhiteSpace(responseJson):
-                case HttpStatusCode.Forbidden when !string.IsNullOrWhiteSpace(responseJson):
-                case HttpStatusCode.Conflict when !string.IsNullOrWhiteSpace(responseJson):
+                case HttpStatusCode.Forbidden  when !string.IsNullOrWhiteSpace(responseJson):
+                case HttpStatusCode.Conflict   when !string.IsNullOrWhiteSpace(responseJson):
                     // Do NOT throw here, an ApiRequestException will be thrown next
                     break;
+
                 default:
                     httpResponse.EnsureSuccessStatusCode();
                     break;
+
             }
 
-            var apiResponse =
-                JsonConvert.DeserializeObject<ApiResponse<TResponse>>(responseJson)
-                ?? new ApiResponse<TResponse> // ToDo is required? unit test
-                {
-                    Ok = false,
-                    Description = "No response received"
-                };
+            var apiResponse = JsonConvert.DeserializeObject<ApiResponse<TResponse>>(responseJson)
+                                  ?? new ApiResponse<TResponse> { // ToDo is required? unit test
+                                             Ok          = false,
+                                             Description = "No response received"
+                                         };
 
             if (!apiResponse.Ok)
                 throw ApiExceptionParser.Parse(apiResponse);
 
             return apiResponse.Result;
+
         }
 
         /// <summary>
@@ -327,35 +333,40 @@ namespace Telegram.Bot
         /// <param name="allowedUpdates">List the types of updates you want your bot to receive.</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <exception cref="ApiRequestException"> Thrown if token is invalid</exception>
-        public void StartReceiving(UpdateType[] allowedUpdates = null,
-                                   CancellationToken cancellationToken = default)
+        public void StartReceiving(UpdateType[]       allowedUpdates      = null,
+                                   CancellationToken  cancellationToken   = default)
         {
+
             _receivingCancellationTokenSource = new CancellationTokenSource();
 
             cancellationToken.Register(() => _receivingCancellationTokenSource.Cancel());
 
             ReceiveAsync(allowedUpdates, _receivingCancellationTokenSource.Token);
+
         }
 
 #pragma warning disable AsyncFixer03 // Avoid fire & forget async void methods
-        private async void ReceiveAsync(
-            UpdateType[] allowedUpdates,
-            CancellationToken cancellationToken = default)
+        private async void ReceiveAsync(UpdateType[]       allowedUpdates,
+                                        CancellationToken  cancellationToken = default)
         {
+
             IsReceiving = true;
+
             while (!cancellationToken.IsCancellationRequested)
             {
+
                 var timeout = Convert.ToInt32(Timeout.TotalSeconds);
                 var updates = EmptyUpdates;
 
                 try
                 {
-                    updates = await GetUpdatesAsync(
-                        MessageOffset,
-                        timeout: timeout,
-                        allowedUpdates: allowedUpdates,
-                        cancellationToken: cancellationToken
-                    ).ConfigureAwait(false);
+
+                    updates = await GetUpdatesAsync(MessageOffset,
+                                                    timeout:           timeout,
+                                                    allowedUpdates:    allowedUpdates,
+                                                    cancellationToken: cancellationToken).
+                                    ConfigureAwait(false);
+
                 }
                 catch (OperationCanceledException)
                 {
@@ -382,9 +393,11 @@ namespace Telegram.Bot
                     IsReceiving = false;
                     throw;
                 }
+
             }
 
             IsReceiving = false;
+
         }
 #pragma warning restore AsyncFixer03 // Avoid fire & forget async void methods
 
@@ -405,39 +418,37 @@ namespace Telegram.Bot
             }
         }
 
-        #endregion Helpers
+        #endregion
 
         #region Getting updates
 
         /// <inheritdoc />
-        public Task<Update[]> GetUpdatesAsync(
-            int offset = default,
-            int limit = default,
-            int timeout = default,
-            IEnumerable<UpdateType> allowedUpdates = default,
-            CancellationToken cancellationToken = default
-        ) =>
-            MakeRequestAsync(new GetUpdatesRequest
-            {
-                Offset = offset,
-                Limit = limit,
-                Timeout = timeout,
-                AllowedUpdates = allowedUpdates
-            }, cancellationToken);
+        public Task<Update[]> GetUpdatesAsync(int                      offset             = default,
+                                              int                      limit              = default,
+                                              int                      timeout            = default,
+                                              IEnumerable<UpdateType>  allowedUpdates     = default,
+                                              CancellationToken        cancellationToken  = default)
+
+            => MakeRequestAsync(new GetUpdatesRequest {
+                                    Offset          = offset,
+                                    Limit           = limit,
+                                    Timeout         = timeout,
+                                    AllowedUpdates  = allowedUpdates
+                                },
+                                cancellationToken);
 
         /// <inheritdoc />
-        public Task SetWebhookAsync(
-            string url,
-            InputFileStream certificate = default,
-            int maxConnections = default,
-            IEnumerable<UpdateType> allowedUpdates = default,
-            CancellationToken cancellationToken = default
-        ) =>
-            MakeRequestAsync(new SetWebhookRequest(url, certificate)
-            {
-                MaxConnections = maxConnections,
-                AllowedUpdates = allowedUpdates
-            }, cancellationToken);
+        public Task SetWebhookAsync(String                  url,
+                                    InputFileStream         certificate        = default,
+                                    Int32                   maxConnections     = default,
+                                    IEnumerable<UpdateType> allowedUpdates     = default,
+                                    CancellationToken       cancellationToken  = default)
+
+            => MakeRequestAsync(new SetWebhookRequest(url, certificate) {
+                                    MaxConnections  = maxConnections,
+                                    AllowedUpdates  = allowedUpdates
+                                },
+                                cancellationToken);
 
         /// <inheritdoc />
         public Task DeleteWebhookAsync(CancellationToken cancellationToken = default)
@@ -447,7 +458,7 @@ namespace Telegram.Bot
         public Task<WebhookInfo> GetWebhookInfoAsync(CancellationToken cancellationToken = default)
             => MakeRequestAsync(new GetWebhookInfoRequest(), cancellationToken);
 
-        #endregion Getting updates
+        #endregion
 
         #region Available methods
 
@@ -1508,5 +1519,7 @@ namespace Telegram.Bot
             MakeRequestAsync(new DeleteStickerFromSetRequest(sticker), cancellationToken);
 
         #endregion
+
     }
+
 }

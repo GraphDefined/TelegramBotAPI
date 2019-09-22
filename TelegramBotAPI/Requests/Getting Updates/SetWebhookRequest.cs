@@ -14,6 +14,7 @@ namespace Telegram.Bot.Requests
     [JsonObject(MemberSerialization.OptIn, NamingStrategyType = typeof(SnakeCaseNamingStrategy))]
     public class SetWebhookRequest : FileRequestBase<bool>
     {
+
         /// <summary>
         /// HTTPS url to send updates to. Use an empty string to remove webhook integration.
         /// </summary>
@@ -46,8 +47,8 @@ namespace Telegram.Bot.Requests
         public SetWebhookRequest(string url, InputFileStream certificate)
             : base("setWebhook")
         {
-            Url = url;
-            Certificate = certificate;
+            Url          = url;
+            Certificate  = certificate;
         }
 
         /// <inheritdoc cref="RequestBase{TResponse}.ToHttpContent"/>
@@ -55,5 +56,6 @@ namespace Telegram.Bot.Requests
             Certificate == null
                 ? base.ToHttpContent()
                 : ToMultipartFormDataContent("certificate", Certificate);
+
     }
 }

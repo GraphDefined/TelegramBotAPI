@@ -14,6 +14,7 @@ namespace Telegram.Bot.Requests
     /// <typeparam name="TResponse">Type of result expected in result</typeparam>
     public abstract class FileRequestBase<TResponse> : RequestBase<TResponse>
     {
+
         /// <summary>
         /// Initializes an instance of request
         /// </summary>
@@ -39,11 +40,13 @@ namespace Telegram.Bot.Requests
         /// <returns></returns>
         protected MultipartFormDataContent ToMultipartFormDataContent(string fileParameterName, InputFileStream inputFile)
         {
+
             var multipartContent = GenerateMultipartFormDataContent(fileParameterName);
 
             multipartContent.AddStreamContent(inputFile.Content, fileParameterName, inputFile.FileName);
 
             return multipartContent;
+
         }
 
         /// <summary>
@@ -53,20 +56,22 @@ namespace Telegram.Bot.Requests
         /// <returns></returns>
         protected MultipartFormDataContent GenerateMultipartFormDataContent(params string[] exceptPropertyNames)
         {
+
             var multipartContent = new MultipartFormDataContent(Guid.NewGuid().ToString() + DateTime.UtcNow.Ticks);
 
             var stringContents = JObject.FromObject(this)
                 .Properties()
                 .Where(prop => exceptPropertyNames?.Contains(prop.Name) == false)
-                .Select(prop => new
-                {
+                .Select(prop => new {
                     prop.Name,
                     Content = new StringContent(prop.Value.ToString())
                 });
+
             foreach (var strContent in stringContents)
                 multipartContent.Add(strContent.Content, strContent.Name);
 
             return multipartContent;
+
         }
 
         /// <summary>
@@ -79,5 +84,7 @@ namespace Telegram.Bot.Requests
         {
             throw new NotImplementedException();
         }
+
     }
+
 }
