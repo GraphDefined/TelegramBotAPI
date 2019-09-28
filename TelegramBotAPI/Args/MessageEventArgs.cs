@@ -4,6 +4,7 @@ using Telegram.Bot.Types.Enums;
 
 namespace Telegram.Bot.Args
 {
+
     /// <summary>
     /// <see cref="EventArgs"/> containing a <see cref="Types.Message"/>
     /// </summary>
