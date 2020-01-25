@@ -273,9 +273,9 @@ namespace Telegram.Bot
 
             ApiResponseReceived?.Invoke(this,
                                         new ApiResponseEventArgs {
-                                                ResponseMessage     = httpResponse,
-                                                ApiRequestEventArgs = reqDataArgs
-                                            });
+                                            ResponseMessage      = httpResponse,
+                                            ApiRequestEventArgs  = reqDataArgs
+                                        });
 
             switch (actualResponseStatusCode)
             {
@@ -313,7 +313,7 @@ namespace Telegram.Bot
         /// Test the API token
         /// </summary>
         /// <returns><c>true</c> if token is valid</returns>
-        public async Task<bool> TestApiAsync(CancellationToken cancellationToken = default)
+        public async Task<Boolean> TestApiAsync(CancellationToken cancellationToken = default)
         {
             try
             {
@@ -467,24 +467,22 @@ namespace Telegram.Bot
             => MakeRequestAsync(new GetMeRequest(), cancellationToken);
 
         /// <inheritdoc />
-        public Task<Message> SendTextMessageAsync(
-            ChatId chatId,
-            string text,
-            ParseMode parseMode = default,
-            bool disableWebPagePreview = default,
-            bool disableNotification = default,
-            int replyToMessageId = default,
-            IReplyMarkup replyMarkup = default,
-            CancellationToken cancellationToken = default
-        ) =>
-            MakeRequestAsync(new SendMessageRequest(chatId, text)
-            {
-                ParseMode = parseMode,
-                DisableWebPagePreview = disableWebPagePreview,
-                DisableNotification = disableNotification,
-                ReplyToMessageId = replyToMessageId,
-                ReplyMarkup = replyMarkup
-            }, cancellationToken);
+        public Task<Message> SendTextMessageAsync(ChatId             ChatId,
+                                                  String             Text,
+                                                  ParseMode          ParseMode               = default,
+                                                  Boolean            DisableWebPagePreview   = default,
+                                                  Boolean            DisableNotification     = default,
+                                                  Int32              ReplyToMessageId        = default,
+                                                  IReplyMarkup       ReplyMarkup             = default,
+                                                  CancellationToken  CancellationToken       = default)
+
+            => MakeRequestAsync(new SendMessageRequest(ChatId, Text) {
+                                    ParseMode              = ParseMode,
+                                    DisableWebPagePreview  = DisableWebPagePreview,
+                                    DisableNotification    = DisableNotification,
+                                    ReplyToMessageId       = ReplyToMessageId,
+                                    ReplyMarkup            = ReplyMarkup
+                                }, CancellationToken);
 
         /// <inheritdoc />
         public Task<Message> ForwardMessageAsync(

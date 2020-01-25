@@ -245,25 +245,24 @@ namespace Telegram.Bot
         /// <summary>
         /// Use this method to send text messages. On success, the sent Description is returned.
         /// </summary>
-        /// <param name="chatId"><see cref="ChatId"/> for the target chat</param>
-        /// <param name="text">Text of the message to be sent</param>
-        /// <param name="parseMode">Change, if you want Telegram apps to show bold, italic, fixed-width text or inline URLs in your bot's message.</param>
-        /// <param name="disableWebPagePreview">Disables link previews for links in this message</param>
-        /// <param name="disableNotification">Sends the message silently. iOS users will not receive a notification, Android users will receive a notification with no sound.</param>
-        /// <param name="replyToMessageId">If the message is a reply, ID of the original message</param>
-        /// <param name="replyMarkup">Additional interface options. A JSON-serialized object for a custom reply keyboard, instructions to hide keyboard or to force a reply from the user.</param>
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <param name="ChatId"><see cref="ChatId"/> for the target chat</param>
+        /// <param name="Text">Text of the message to be sent</param>
+        /// <param name="ParseMode">Change, if you want Telegram apps to show bold, italic, fixed-width text or inline URLs in your bot's message.</param>
+        /// <param name="DisableWebPagePreview">Disables link previews for links in this message</param>
+        /// <param name="DisableNotification">Sends the message silently. iOS users will not receive a notification, Android users will receive a notification with no sound.</param>
+        /// <param name="ReplyToMessageId">If the message is a reply, ID of the original message</param>
+        /// <param name="ReplyMarkup">Additional interface options. A JSON-serialized object for a custom reply keyboard, instructions to hide keyboard or to force a reply from the user.</param>
+        /// <param name="CancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>On success, the sent Description is returned.</returns>
         /// <see href="https://core.telegram.org/bots/api#sendmessage"/>
-        Task<Message> SendTextMessageAsync(
-            ChatId chatId,
-            string text,
-            ParseMode parseMode = default,
-            bool disableWebPagePreview = default,
-            bool disableNotification = default,
-            int replyToMessageId = default,
-            IReplyMarkup replyMarkup = default,
-            CancellationToken cancellationToken = default);
+        Task<Message> SendTextMessageAsync(ChatId             ChatId,
+                                           String             Text,
+                                           ParseMode          ParseMode               = default,
+                                           Boolean            DisableWebPagePreview   = default,
+                                           Boolean            DisableNotification     = default,
+                                           Int32              ReplyToMessageId        = default,
+                                           IReplyMarkup       ReplyMarkup             = default,
+                                           CancellationToken  CancellationToken       = default);
 
         /// <summary>
         /// Use this method to forward messages of any kind. On success, the sent Description is returned.
@@ -1586,5 +1585,7 @@ namespace Telegram.Bot
             CancellationToken cancellationToken = default);
 
         #endregion
+
     }
+
 }
