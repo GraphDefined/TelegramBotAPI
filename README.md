@@ -5,7 +5,7 @@ A .NET Client for the Telegram Bot API, based on https://github.com/TelegramBots
 
 ## Requirements
 
-* C# >= 4.7.1
+* C# >= 4.8
 
 ## LICENSE
 [MIT License](https://github.com/TelegramBots/Telegram.Bot/blob/master/LICENSE)
