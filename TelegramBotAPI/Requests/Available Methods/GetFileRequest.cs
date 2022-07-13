@@ -9,7 +9,7 @@ namespace Telegram.Bot.Requests
     /// Get basic info about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a <see cref="File"/> object is returned.
     /// </summary>
     [JsonObject(MemberSerialization.OptIn, NamingStrategyType = typeof(SnakeCaseNamingStrategy))]
-    public class GetFileRequest : RequestBase<File>
+    public class GetFileRequest : RequestBase<Telegram.Bot.Types.File>
     {
         /// <summary>
         /// File identifier to get info about
