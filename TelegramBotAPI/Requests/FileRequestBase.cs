@@ -57,7 +57,7 @@ namespace Telegram.Bot.Requests
         protected MultipartFormDataContent GenerateMultipartFormDataContent(params string[] exceptPropertyNames)
         {
 
-            var multipartContent = new MultipartFormDataContent(Guid.NewGuid().ToString() + DateTime.UtcNow.Ticks);
+            var multipartContent = new MultipartFormDataContent(Guid.NewGuid().ToString() + org.GraphDefined.Vanaheimr.Illias.Timestamp.Now.Ticks);
 
             var stringContents = JObject.FromObject(this)
                 .Properties()
