@@ -11,7 +11,7 @@ namespace Telegram.Bot.Converters
         {
             var chatId = (ChatId)value;
 
-            if (chatId.Username != null)
+            if (chatId.Username is not null)
             {
                 writer.WriteValue(chatId.Username);
             }

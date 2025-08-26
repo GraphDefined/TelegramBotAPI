@@ -25,8 +25,8 @@ namespace Telegram.Bot.Types.InputFiles
         {
             get
             {
-                if (Content != null) return FileType.Stream;
-                if (FileId != null) return FileType.Id;
+                if (Content is not null) return FileType.Stream;
+                if (FileId is not null) return FileType.Id;
                 throw new InvalidOperationException("Not a valid Input File");
             }
         }
@@ -70,7 +70,7 @@ namespace Telegram.Bot.Types.InputFiles
         /// </summary>
         /// <param name="stream"></param>
         public static implicit operator InputTelegramFile(Stream stream) =>
-            stream == null
+            stream is null
                 ? default
                 : new InputTelegramFile(stream);
 
@@ -79,7 +79,7 @@ namespace Telegram.Bot.Types.InputFiles
         /// </summary>
         /// <param name="fileId"></param>
         public static implicit operator InputTelegramFile(string fileId) =>
-            fileId == null
+            fileId is null
                 ? default
                 : new InputTelegramFile(fileId);
     }

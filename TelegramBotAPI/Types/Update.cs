@@ -92,16 +92,16 @@ namespace Telegram.Bot.Types
         {
             get
             {
-                if (Message != null) return UpdateType.Message;
-                if (InlineQuery != null) return UpdateType.InlineQuery;
-                if (ChosenInlineResult != null) return UpdateType.ChosenInlineResult;
-                if (CallbackQuery != null) return UpdateType.CallbackQuery;
-                if (EditedMessage != null) return UpdateType.EditedMessage;
-                if (ChannelPost != null) return UpdateType.ChannelPost;
-                if (EditedChannelPost != null) return UpdateType.EditedChannelPost;
-                if (ShippingQuery != null) return UpdateType.ShippingQuery;
-                if (PreCheckoutQuery != null) return UpdateType.PreCheckoutQuery;
-                if (Poll != null) return UpdateType.Poll;
+                if (Message is not null) return UpdateType.Message;
+                if (InlineQuery is not null) return UpdateType.InlineQuery;
+                if (ChosenInlineResult is not null) return UpdateType.ChosenInlineResult;
+                if (CallbackQuery is not null) return UpdateType.CallbackQuery;
+                if (EditedMessage is not null) return UpdateType.EditedMessage;
+                if (ChannelPost is not null) return UpdateType.ChannelPost;
+                if (EditedChannelPost is not null) return UpdateType.EditedChannelPost;
+                if (ShippingQuery is not null) return UpdateType.ShippingQuery;
+                if (PreCheckoutQuery is not null) return UpdateType.PreCheckoutQuery;
+                if (Poll is not null) return UpdateType.Poll;
 
                 return UpdateType.Unknown;
             }

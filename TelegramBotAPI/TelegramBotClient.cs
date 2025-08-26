@@ -697,7 +697,7 @@ namespace Telegram.Bot
         {
             var inputMedia = media
                 .Select(m => m as IAlbumInputMedia)
-                .Where(m => m != null)
+                .Where(m => m is not null)
                 .ToArray();
             return MakeRequestAsync(new SendMediaGroupRequest(chatId, inputMedia)
             {
@@ -853,7 +853,7 @@ namespace Telegram.Bot
                 throw new ArgumentException("Invalid file path", nameof(filePath));
             }
 
-            if (destination == null)
+            if (destination is null)
             {
                 throw new ArgumentNullException(nameof(destination));
             }

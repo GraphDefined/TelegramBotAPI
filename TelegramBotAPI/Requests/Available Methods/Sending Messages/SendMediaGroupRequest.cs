@@ -51,7 +51,7 @@ namespace Telegram.Bot.Requests
             ChatId = chatId;
             Media = media
                 .Select(m => m as IAlbumInputMedia)
-                .Where(m => m != null)
+                .Where(m => m is not null)
                 .ToArray();
         }
 

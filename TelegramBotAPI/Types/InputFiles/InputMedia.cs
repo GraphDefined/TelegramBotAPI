@@ -42,7 +42,7 @@ namespace Telegram.Bot.Types
         /// from the Internet
         /// </param>
         public static implicit operator InputMedia(string value) =>
-            value == null
+            value is null
                 ? null
                 : new InputMedia(value);
     }

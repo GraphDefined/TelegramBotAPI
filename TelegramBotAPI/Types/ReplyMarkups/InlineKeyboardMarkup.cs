@@ -62,7 +62,7 @@ namespace Telegram.Bot.Types.ReplyMarkups
         /// </summary>
         /// <param name="button">Inline keyboard button</param>
         public static implicit operator InlineKeyboardMarkup(InlineKeyboardButton button) =>
-            button == null
+            button is null
                 ? default
                 : new InlineKeyboardMarkup(button);
 
@@ -71,7 +71,7 @@ namespace Telegram.Bot.Types.ReplyMarkups
         /// </summary>
         /// <param name="buttonText">Text of the button</param>
         public static implicit operator InlineKeyboardMarkup(string buttonText) =>
-            buttonText == null
+            buttonText is null
                 ? default
                 : new InlineKeyboardMarkup(buttonText);
 
@@ -80,7 +80,7 @@ namespace Telegram.Bot.Types.ReplyMarkups
         /// </summary>
         /// <param name="inlineKeyboard">Keyboard buttons</param>
         public static implicit operator InlineKeyboardMarkup(IEnumerable<InlineKeyboardButton>[] inlineKeyboard) =>
-            inlineKeyboard == null
+            inlineKeyboard is null
                 ? null
                 : new InlineKeyboardMarkup(inlineKeyboard);
 
@@ -89,7 +89,7 @@ namespace Telegram.Bot.Types.ReplyMarkups
         /// </summary>
         /// <param name="inlineKeyboard">Keyboard buttons</param>
         public static implicit operator InlineKeyboardMarkup(InlineKeyboardButton[] inlineKeyboard) =>
-            inlineKeyboard == null
+            inlineKeyboard is null
                 ? null
                 : new InlineKeyboardMarkup(inlineKeyboard);
     }

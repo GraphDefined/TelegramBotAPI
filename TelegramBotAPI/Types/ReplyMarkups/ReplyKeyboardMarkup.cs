@@ -76,7 +76,7 @@ namespace Telegram.Bot.Types.ReplyMarkups
         /// </summary>
         /// <param name="text">Button's text</param>
         public static implicit operator ReplyKeyboardMarkup(string text) =>
-            text == null
+            text is null
                 ? default
                 : new ReplyKeyboardMarkup(new[] { new KeyboardButton(text) });
 
@@ -85,7 +85,7 @@ namespace Telegram.Bot.Types.ReplyMarkups
         /// </summary>
         /// <param name="texts">Texts of buttons</param>
         public static implicit operator ReplyKeyboardMarkup(string[] texts) =>
-            texts == null
+            texts is null
                 ? default
                 : new[] { texts };
 
@@ -94,7 +94,7 @@ namespace Telegram.Bot.Types.ReplyMarkups
         /// </summary>
         /// <param name="textsItems">Texts of buttons</param>
         public static implicit operator ReplyKeyboardMarkup(string[][] textsItems) =>
-            textsItems == null
+            textsItems is null
                 ? default
                 : new ReplyKeyboardMarkup(
                     textsItems.Select(texts =>

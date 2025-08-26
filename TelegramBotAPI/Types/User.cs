@@ -98,7 +98,7 @@ namespace Telegram.Bot.Types
         }
 
         /// <inheritdoc/>
-        public override string ToString() => (Username == null
+        public override string ToString() => (Username is null
                                                  ? FirstName + LastName?.Insert(0, " ")
                                                  : $"@{Username}") +
                                              $" ({Id})";

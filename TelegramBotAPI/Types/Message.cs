@@ -51,7 +51,7 @@ namespace Telegram.Bot.Types
         /// </summary>
         [Obsolete("Check ForwardFrom and ForwardFromChat properties instead")]
         public Boolean IsForwarded
-            => ForwardFrom != null;
+            => ForwardFrom is not null;
 
         /// <summary>
         /// Optional. For forwarded messages, sender of the original message
@@ -343,64 +343,64 @@ namespace Telegram.Bot.Types
             get
             {
 
-                if (Audio != null)
+                if (Audio is not null)
                     return MessageType.Audio;
 
-                if (Document != null)
+                if (Document is not null)
                     return MessageType.Document;
 
-                if (Game != null)
+                if (Game is not null)
                     return MessageType.Game;
 
-                if (Photo != null)
+                if (Photo is not null)
                     return MessageType.Photo;
 
-                if (Sticker != null)
+                if (Sticker is not null)
                     return MessageType.Sticker;
 
-                if (Video != null)
+                if (Video is not null)
                     return MessageType.Video;
 
-                if (Voice != null)
+                if (Voice is not null)
                     return MessageType.Voice;
 
-                if (Contact != null)
+                if (Contact is not null)
                     return MessageType.Contact;
 
-                if (Venue != null)
+                if (Venue is not null)
                     return MessageType.Venue;
 
-                if (Location != null)
+                if (Location is not null)
                     return MessageType.Location;
 
-                if (Text != null)
+                if (Text is not null)
                     return MessageType.Text;
 
-                if (Invoice != null)
+                if (Invoice is not null)
                     return MessageType.Invoice;
 
-                if (SuccessfulPayment != null)
+                if (SuccessfulPayment is not null)
                     return MessageType.SuccessfulPayment;
 
-                if (VideoNote != null)
+                if (VideoNote is not null)
                     return MessageType.VideoNote;
 
-                if (ConnectedWebsite != null)
+                if (ConnectedWebsite is not null)
                     return MessageType.WebsiteConnected;
 
                 if (NewChatMembers?.Any() == true)
                     return MessageType.ChatMembersAdded;
 
-                if (LeftChatMember != null)
+                if (LeftChatMember is not null)
                     return MessageType.ChatMemberLeft;
 
-                if (NewChatTitle != null)
+                if (NewChatTitle is not null)
                     return MessageType.ChatTitleChanged;
 
-                if (NewChatPhoto != null)
+                if (NewChatPhoto is not null)
                     return MessageType.ChatPhotoChanged;
 
-                if (PinnedMessage != null)
+                if (PinnedMessage is not null)
                     return MessageType.MessagePinned;
 
                 if (DeleteChatPhoto)
@@ -421,7 +421,7 @@ namespace Telegram.Bot.Types
                 if (MigrateToChatId != default)
                     return MessageType.MigratedToSupergroup;
 
-                if (Poll != null)
+                if (Poll is not null)
                     return MessageType.Poll;
 
                 return MessageType.Unknown;
